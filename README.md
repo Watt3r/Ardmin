@@ -11,7 +11,7 @@ Ardmin is a cheap, lightweight GPS device for bikes.
 * [Pro Mini 3.3v ATMega 328p](https://www.aliexpress.com/item/32821902128.html?spm=a2g0s.9042311.0.0.30594c4df8xZIr)
 * Toggle Switch
 #### Wiring
-TODO: Document wiring schematic
+TODO: Upload Image of wiring from Fritzing diagram
 ### Case
 As with all great projects, the case is made out of an old pizza box. Plans are underway to create a 3d printed case, however.
 ### Software
@@ -22,7 +22,6 @@ When using an arduino mini, there are not enough hardware serial ports. To get a
 All of these libraries must be installed and placed into your Arduino Libraries folder before the software can be flashed.  
 NeoGPS requires quite a bit of setup to work, but it is definitely worth the ssetup.  
 ### Next steps
-1. Document Wiring 
 2. 3D model case
 3. Add pictures and working demo video
 5. More Garmin features
