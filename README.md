@@ -17,12 +17,15 @@ As with all great projects, the case is made out of an old pizza box. Plans are 
 ### Software
 #### Installing Libraries
 This project uses the genius [SSD1306 Text only library](https://github.com/greiman/SSD1306Ascii) to save RAM.  
-In order to interact with the NEO 6M module, the [TinyGPS++ Library](http://arduiniana.org/libraries/tinygpsplus/) is used.  
-Both of these libraries must be installed and placed into your Arduino Libraries folder before the software can be flashed.  
+In order to interact with the NEO 6M module, the [NeoGPS library](https://github.com/SlashDevin/NeoGPS) is used.  
+When using an arduino mini, there are not enough hardware serial ports. To get arount this, use the [NeoSWSerial library](https://github.com/SlashDevin/NeoSWSerial)
+All of these libraries must be installed and placed into your Arduino Libraries folder before the software can be flashed.  
+NeoGPS requires quite a bit of setup to work, but it is definitely worth the ssetup.  
 ### Next steps
 1. Document Wiring 
 2. 3D model case
 3. Add pictures and working demo video
-4. Add option to "pause" ride
-    * Manually through a switch
-    * Automatically if no motion is detected for a while
+5. More Garmin features
+    * Calories burned [here](https://keisan.casio.com/exec/system/1350958587)
+8. Power percentage
+
