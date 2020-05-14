@@ -82,6 +82,9 @@ void loop() {
         // Update current lat,lng
         clat = fix.latitude();
         clng = fix.latitude();
+      } else {
+        // Dont start ride until lat & lng fix is found
+        return;
       }
 
 
@@ -96,8 +99,8 @@ void loop() {
 
       
       // Update total distance
-      if (currentMillis - previousMillis >= 10000) {
-        // Code to run every 10 seconds (10000 ms)
+      if (currentMillis - previousMillis >= 10000 || plat == 0) {
+        // Code to run every 10 seconds (10000 ms) or on first run
 
         // Clear the top section of oled in case of unexpected bug
         // BUG: sometimes speed overrides distance traveled
@@ -200,7 +203,6 @@ void loop() {
         oled.println();
 
         // Print moving time
-        // TODO:
         oled.print("Riding time: " + String(millistoHMS((currentMillis-pausedMillis)/1000)));
         oled.println();
 
