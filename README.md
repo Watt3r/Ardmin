@@ -11,7 +11,7 @@ Ardmin is a cheap, lightweight GPS device for bikes.
 * [Pro Mini 3.3v ATMega 328p](https://www.aliexpress.com/item/32821902128.html?spm=a2g0s.9042311.0.0.30594c4df8xZIr)
 * Toggle Switch
 #### Wiring
-TODO: Upload Image of wiring from Fritzing diagram
+![Wiring Diagram](https://github.com/Watt3r/Ardmin/raw/master/images/Wiring.fzz.png "Wiring.fzz")
 ### Case
 As with all great projects, the case is made out of an old pizza box. Plans are underway to create a 3d printed case, however.
 ### Software
