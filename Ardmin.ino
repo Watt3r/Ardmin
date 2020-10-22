@@ -57,14 +57,14 @@ void setup() {
   oled.clear();
   oled.set2X();
   //Serial.println("Starting...");
-  oled.print("Ardmin v2");
-  oled.println();
+  oledprint("Ardmin v2");
+  
   oled.set1X();
-  oled.print("By Lucas Oberwager");
-  oled.println();
-  oled.print("Booting up..."); 
-  oled.println();
-  oled.print("Searching for GPS..."); 
+  oledprint("By Lucas Oberwager");
+  
+  oledprint("Booting up..."); 
+  
+  oledprint("Searching for GPS..."); 
   oled.set2X();
 }
 
@@ -142,6 +142,13 @@ void loop() {
         // 36 is pixel length of string "MPH"
         oled.setCol(oledDisplayWidth-(oled.fieldWidth(cspd==0 ? 1 : (floor(log10(cspd)) + 1) ) + 36)  );
         oled.print(String(cspd) + "MPH");
+      } else {
+        // No speed data found! Cannot autopause.
+
+        // Set column to right align
+        // 36 is pixel length of string "N/A"
+        oled.setCol(oledDisplayWidth-36);
+        oled.print("N/A");
       }
       
       
@@ -162,49 +169,45 @@ void loop() {
       static char str[5];
       sprintf(str, "%02d:%02d", fix.dateTime.hours % 12 == 7 ? 12 : (fix.dateTime.hours + 5) % 12, fix.dateTime.minutes);
       oled.print(str);
+
     } else {
       // Ride is paused
       
       if (deltaPaused) {
-        // The ride paused this loop
+        // Ride paused this loop
 
         // Record time when paused
         pauseTime = millis();
 
         oled.clear();
         // Alert the ride was paused
-        // 132 = oled.fieldWidth(11) // 11 = number of characters in string
-        oled.print("RIDE PAUSED");
-        oled.println();
+        oledprint("RIDE PAUSED");
         
         // Set smaller font size to summarize
         oled.set1X();
         
         // Print max speed
-        oled.print("Max Spd: " + String(mspd) + "MPH");
-        oled.println();
+        oledprint("Max Spd: " + String(mspd) + "MPH");
+        
         
         // Print Avg speed
-        oled.print("Avg Spd: " + String(spdSum / spdSamples) + "MPH");
-        oled.println();
+        oledprint("Avg Spd: " + String(spdSum / spdSamples) + "MPH");
+        
 
         // Print total distance
-        oled.print("Distance: " + String(gpsDistance, 2) + "mi");
-        oled.println();
+        oledprint("Distance: " + String(gpsDistance, 2) + "mi");
+        
 
         // Print Current time
         static char str[20];
         sprintf(str, "Current Time: %02d:%02d", fix.dateTime.hours % 12 == 7 ? 12 : (fix.dateTime.hours + 5) % 12, fix.dateTime.minutes);
-        oled.print(str);
-        oled.println();
+        oledprint(str);
 
         // Print Total time
-        oled.print("Elapsed time: " + String(millistoHMS(currentMillis/1000)));
-        oled.println();
+        oledprint("Elapsed time: " + String(millistoHMS(currentMillis/1000)));
 
         // Print moving time
-        oled.print("Riding time: " + String(millistoHMS((currentMillis-pausedMillis)/1000)));
-        oled.println();
+        oledprint("Riding time: " + String(millistoHMS((currentMillis-pausedMillis)/1000)));
 
         deltaPaused = false;
       } else {
@@ -229,20 +232,17 @@ void loop() {
           // Print Current time
           static char str[20];
           sprintf(str, "Current Time: %02d:%02d", fix.dateTime.hours % 12 == 7 ? 12 : (fix.dateTime.hours + 5) % 12, fix.dateTime.minutes);
-          oled.print(str);
-          oled.println();
+          oledprint(str);
 
           // Print Total time
-          oled.print("Elapsed time: " + String(millistoHMS(millis()/1000)));
-          oled.println();
+          oledprint("Elapsed time: " + String(millistoHMS(millis()/1000)));
         }
       }
     }
   }
 }
 
-float calc_dist(float flat1, float flon1, float flat2, float flon2)
-{
+float calc_dist(float flat1, float flon1, float flat2, float flon2) {
   // Calculate distance from starting point using Haversine formula
   //formula:  a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
   //c = 2 ⋅ atan2( √a, √(1−a) )
@@ -275,8 +275,7 @@ float calc_dist(float flat1, float flon1, float flat2, float flon2)
   return dist;
 }
 
-char * millistoHMS(unsigned long t)
-{
+char * millistoHMS(unsigned long t) {
  static char str[12];
  long h = t / 3600;
  t = t % 3600;
@@ -284,4 +283,9 @@ char * millistoHMS(unsigned long t)
  int s = t % 60;
  sprintf(str, "%01ld:%02d:%02d", h, m, s);
  return str;
+}
+
+void oledprint(char * str) {
+    oled.print(str);
+    oled.println();
 }

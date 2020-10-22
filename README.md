@@ -1,5 +1,5 @@
 # Ardmin
-## Simple Arduino clone of a Garmin, created by Lucas Oberwager
+## Simple Arduino bike computer, created by Lucas Oberwager
 
 Ardmin is a cheap, lightweight GPS device for bikes.  
 
